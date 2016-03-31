@@ -7,29 +7,25 @@ void doViz( int lightValue, int forceValue, int flexValue,  int pulse, int dista
   drawLine( distance);
   drawLine( humidity);
   drawLine( temperature);
-
-  drawPoint( lightValue);
-  drawPoint( forceValue);
-  drawPoint( flexValue);
-  drawPoint( pulse);
-  drawPoint( distance);
-  drawPoint( humidity);
-  drawPoint( temperature);
   
+  value = 5;
+
+  index += 4;
 }
 
 void drawLine( int value) {
   
-  stroke( 150,180);
+  stroke( 50);
   strokeWeight(1);
   noFill();  
-  rect( frameCount, value, frameCount + 1, 0);
-  
+  line( index, height, index, height-value);
+
+  index++;
 }
 
 void drawPoint( int value) {
   
   stroke( 0);
-  rect( frameCount, value, 1, 1);
+  rect( index, height-value, .5, .5);
   
 }

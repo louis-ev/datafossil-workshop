@@ -8,7 +8,7 @@ void setup() {
   background(255);
   lines = loadStrings("sensor_value.txt");
 
-  size(1440, 450);
+  size(1600, 600);
   
   // reading rythm
   frameRate(60);
@@ -18,15 +18,15 @@ void setup() {
   
   beginRecord(PDF, "plancheVis.pdf" );
   
-  
+  rectMode( CORNER);
   
 }
 
 void draw() {
   
-  if( frameCount == lines.length-1) {
+  if( frameCount == lines.length-1 || index > width) {
     endRecord();
-    exit();
+    stop();
   }
 
   String[] pieces = split(lines[frameCount], '\t');
