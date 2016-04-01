@@ -12,41 +12,47 @@ void doViz( int[][][] vars, int canvasWidth, int canvasHeight) {
     stroke( 0);
     strokeWeight( 1);
 
-
-    beginShape();
-
     float prevYValue = 0;
 
     int prevPosX = 0;
     float prevPosY = canvasHeight;
-
+    float diamCercle = 342;
+    
+    flexValues = averageAllDatas( flexValues, 10);
+    
+    
+    pushMatrix();
+    translate( canvasWidth/2, canvasHeight/2);
+    
     for ( int j= 0; j<flexValues.length; j++) {
 
-      if ( j == 0) {
-        float posY = flexValues[j] * canvasHeight;
-        prevPosY = posY;
-        continue;
-      }
-
       //if ( prevYValue == flexValues[j] && j > 2)
-      //  continue;
+      //continue;
       //else 
-      //  prevYValue = flexValues[j];
+      //prevYValue = flexValues[j];
 
-      int posX = int( map( j, 0, flexValues.length, 0, canvasWidth));
-      float posY = canvasHeight - (flexValues[j] * canvasHeight);
+      float deg = int( map( j, 0, flexValues.length, 345, 15));
+      float intensitePression = flexValues[j] * diamCercle/2 + 20;
+      
+      pushMatrix();
 
-      //drawBezierVertexBetween( prevPosX, prevPosY, posX, posY);
-      line( prevPosX, prevPosY, posX, posY);
+      float distAngle = radians(deg);
+      float translateToX = (sin(distAngle) * diamCercle/2);
+      float translateToY = (cos(distAngle) * diamCercle/2);
+      translate( translateToX, translateToY);
+      
+      fill(255);
+      strokeWeight(1);
+      stroke(0);
+      
+      ellipse( 0, 0, intensitePression, intensitePression); 
+      
+      popMatrix();
 
-      prevPosX = posX;
-      prevPosY = posY;
     }
 
-
+    popMatrix();
     //println( flexValues[i]);
-
-    endShape();
   }
 }
 
@@ -87,6 +93,26 @@ float[] getAllValuesOfOneTypeForOneFile( int[][][] vars, int fileNumber, int fie
   return allValues;
 }
 
+float[] averageAllDatas( float[] inputData, int surroundingAverages) {
+  float[] outputData = new float[inputData.length];
+
+  int allDataLength = inputData.length;
+  for( int i=0; i<allDataLength; i++) {
+    float averageValue = 0;
+    
+    int previousValues = i < surroundingAverages ? 0 : i - surroundingAverages;
+    int nextValues = i > allDataLength - surroundingAverages ? allDataLength: i + surroundingAverages;
+    
+    for( int j = previousValues; j < nextValues; j++) {
+      averageValue += inputData[j];
+    }
+    
+    averageValue /= surroundingAverages * 2;
+    outputData[i] = averageValue;
+  }
+  
+  return outputData;
+}
 
 float mapValuesFromSensorsNumber( int originalValue, int fieldNumber) { 
 

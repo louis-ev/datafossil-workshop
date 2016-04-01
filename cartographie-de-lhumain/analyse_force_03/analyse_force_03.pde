@@ -16,11 +16,10 @@ void setup() {
   frameRate(60);
 
   String[] listeFichiers;
-  listeFichiers = loadExports( "data_logs/estelle_flexo");
+  listeFichiers = loadExports( "data_logs/estelle_force");
 
   allVars = getVarsFromFiles( listeFichiers);
 
-  smooth();
 }
 
 void draw() {

@@ -30,7 +30,7 @@ void draw() {
   beginRecord(PDF, "plancheVis.pdf" );
 
   // afficher tous les points
-  doViz( allVars, width, height); 
+  doViz( allVars, width, height - 100); 
 
 
   //endRecord();

@@ -6,6 +6,10 @@ int x=0 ;
 
 int[][][] allVars; 
 
+import peasy.*;
+
+PeasyCam cam;
+
 void setup() {
 
   background(255);
@@ -16,11 +20,14 @@ void setup() {
   frameRate(60);
 
   String[] listeFichiers;
-  listeFichiers = loadExports( "data_logs/estelle_flexo");
+  listeFichiers = loadExports( "data_logs/louis_force");
 
   allVars = getVarsFromFiles( listeFichiers);
 
-  smooth();
+  cam = new PeasyCam(this, 100);
+  cam.setMinimumDistance(50);
+  cam.setMaximumDistance(500);
+
 }
 
 void draw() {
@@ -30,9 +37,9 @@ void draw() {
   beginRecord(PDF, "plancheVis.pdf" );
 
   // afficher tous les points
-  doViz( allVars, width, height); 
+  doViz( allVars, width, height - 100); 
 
 
-  endRecord();
-  exit();
+  //endRecord();
+  //exit();
 }

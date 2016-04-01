@@ -12,13 +12,18 @@ void doViz( int[][][] vars, int canvasWidth, int canvasHeight) {
     stroke( 0);
     strokeWeight( 1);
 
-
-    beginShape();
-
     float prevYValue = 0;
 
     int prevPosX = 0;
     float prevPosY = canvasHeight;
+    
+    
+    pushMatrix();
+    translate(canvasWidth/2, canvasHeight/2,0);
+    noFill();
+    stroke(255,0,0);
+    box( canvasWidth, canvasHeight, 5);
+    popMatrix();
 
     for ( int j= 0; j<flexValues.length; j++) {
 
@@ -28,25 +33,32 @@ void doViz( int[][][] vars, int canvasWidth, int canvasHeight) {
         continue;
       }
 
-      //if ( prevYValue == flexValues[j] && j > 2)
-      //  continue;
-      //else 
-      //  prevYValue = flexValues[j];
+      if ( prevYValue == flexValues[j] && j > 2)
+       continue;
+      else 
+       prevYValue = flexValues[j];
 
       int posX = int( map( j, 0, flexValues.length, 0, canvasWidth));
       float posY = canvasHeight - (flexValues[j] * canvasHeight);
 
       //drawBezierVertexBetween( prevPosX, prevPosY, posX, posY);
-      line( prevPosX, prevPosY, posX, posY);
+      
+      pushMatrix();
+      translate( posX, posY, 0);
+      
+      fill(0, 150);
+      stroke(0);
+      
+      //box( j, posY, 50);
+      box( 50);
+      
+      popMatrix();
 
       prevPosX = posX;
       prevPosY = posY;
     }
 
-
     //println( flexValues[i]);
-
-    endShape();
   }
 }
 

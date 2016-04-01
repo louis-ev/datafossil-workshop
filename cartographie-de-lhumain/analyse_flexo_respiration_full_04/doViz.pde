@@ -56,6 +56,13 @@ void doViz( int[][][] vars, int canvasWidth, int canvasHeight) {
 
 }
 
+void squigglyLine( float posx1, float posy1, float posx2, float posy2) {
+  
+  
+  
+  
+}
+
 void drawBezierVertexBetween( int prevPosX, float prevPosY, int posX, float posY) {
   
   float ancre1X = lerp(prevPosX, posX, 0.7);
@@ -63,7 +70,7 @@ void drawBezierVertexBetween( int prevPosX, float prevPosY, int posX, float posY
   float ancre2X = lerp(posX, prevPosX, 0.5);
   float ancre2Y = lerp(posY, prevPosY, 0.0);
   
-//  bezierVertex( ancre1X, ancre1Y, ancre2X, ancre2Y, posX, posY);  
+   //bezierVertex( ancre1X, ancre1Y, ancre2X, ancre2Y, posX, posY);  
   curveVertex( posX, posY);
   
   if( keyPressed) {
